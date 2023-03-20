@@ -57,10 +57,20 @@ const rankFetch = async (channel, args) => {
 
 const rankSpeak = (channel, data) => {
 
+    const capitalize = (s) => {
+        if (typeof s !== 'string') return ''
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+
     try {
         const {summonerName, tier, rank, leaguePoints} = data[0]
 
-        client.say(channel, `${summonerName} is currently ${tier} ${rank} with ${leaguePoints} LP.`)
+        if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
+            client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} avec ${leaguePoints} LP.`)
+        }
+        else {
+            client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP.`)
+        }
     } catch (e) {
         client.say(channel, `Invalid Summoner name.`)
     }
