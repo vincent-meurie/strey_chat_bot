@@ -14,12 +14,12 @@ const client = new tmi.Client({
     },
 
     identity: {
-        username: 'EiShroom',
+        username: process.env.TWITCH_BOT_USERNAME,
         password: process.env.TWITCH_OAUTH_TOKEN
     },
 
     //Channel connecting to
-    channels: [ 'EiShroom' ]
+    channels: [ 'Strey_LoL' ]
 });
 
 client.connect();
