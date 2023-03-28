@@ -64,9 +64,12 @@ const rankSpeak = (channel, data) => {
 
     try {
 
+        /* USELESS SINCE LAST RIOT API UPDATE
         if(typeof data[1] !== 'undefined') {
             data[0] = data[1]
         }
+
+         */
 
         const {summonerName, tier, rank, leaguePoints} = data[0]
 
@@ -77,6 +80,6 @@ const rankSpeak = (channel, data) => {
             client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP.`)
         }
     } catch (e) {
-        client.say(channel, `Invalid Summoner name.`)
+        client.say(channel, `Invalid or unranked Summoner name.`)
     }
 }
