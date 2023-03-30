@@ -36,6 +36,10 @@ client.on('message', (channel, tags, message, self) => {
         rankFetch(channel, args)
     }
 
+    if (command === 'challenge') {
+        client.say(channel, `https://twitter.com/TraYt0N/status/1638228942728339461/photo/1`)
+    }
+
     console.log(`${tags['display-name']}: ${message}`);
 });
 
