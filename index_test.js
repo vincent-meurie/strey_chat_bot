@@ -37,7 +37,7 @@ client.on('message', (channel, tags, message, self) => {
     }
 
     if (command === 'challenge') {
-        client.say(channel, `https://twitter.com/TraYt0N/status/1638228942728339461/photo/1`)
+        client.say(channel, `https://soloqchallenge.fr/`)
     }
 
     console.log(`${tags['display-name']}: ${message}`);
