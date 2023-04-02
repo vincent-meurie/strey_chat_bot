@@ -7,7 +7,7 @@ require('dotenv').config({path: __dirname + '/.env'})
 //establish a tmi.js client as a listener
 const client = new tmi.Client({
     //basic options
-    options: { debug: true },
+    options: {debug: true},
     connection: {
         secure: true,
         reconnect: true
@@ -19,7 +19,7 @@ const client = new tmi.Client({
     },
 
     //Channel connecting to
-    channels: [ 'Strey_LoL' ]
+    channels: ['Strey_LoL']
 });
 
 client.connect();
@@ -27,19 +27,28 @@ client.connect();
 // the actual reporting event
 
 client.on('message', (channel, tags, message, self) => {
-    if(self || !message.startsWith('!')) return;
+    if (self || !message.startsWith('!')) return;
+
+    var canSendMessage = true;
 
     const args = message.slice(1).split(' ')
     const command = args.shift().toLowerCase();
 
-    if (command === 'rank') {
-        rankFetch(channel, args)
+    if (canSendMessage) {
+        if (command === 'rank') {
+            rankFetch(channel, args);
+            canSendMessage = false;
+        }
+
+        if (command === 'challenge') {
+            client.say(channel, `https://soloqchallenge.fr le nombre de win / loses est dans le titre du stream`);
+            canSendMessage = false;
+        }
     }
 
-    if (command === 'challenge') {
-        client.say(channel, `https://soloqchallenge.fr le nombre de win / loses est dans le titre du stream`)
-    }
-
+    setTimeout(function () {
+        canSendMessage = true;
+    }, 2000);
     console.log(`${tags['display-name']}: ${message}`);
 });
 
@@ -69,7 +78,7 @@ const rankSpeak = (channel, data) => {
     try {
 
 
-        if(typeof data[1] !== 'undefined') {
+        if (typeof data[1] !== 'undefined') {
             data[0] = data[1]
         }
 
@@ -77,8 +86,7 @@ const rankSpeak = (channel, data) => {
 
         if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
             client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} avec ${leaguePoints} LP.`)
-        }
-        else {
+        } else {
             client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP.`)
         }
     } catch (e) {
