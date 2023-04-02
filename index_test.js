@@ -26,10 +26,11 @@ client.connect();
 
 // the actual reporting event
 
+var canSendMessage = true;
+
 client.on('message', (channel, tags, message, self) => {
     if (self || !message.startsWith('!')) return;
 
-    var canSendMessage = true;
 
     const args = message.slice(1).split(' ')
     const command = args.shift().toLowerCase();
