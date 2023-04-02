@@ -68,12 +68,10 @@ const rankSpeak = (channel, data) => {
 
     try {
 
-        /* USELESS SINCE LAST RIOT API UPDATE
+
         if(typeof data[1] !== 'undefined') {
             data[0] = data[1]
         }
-
-         */
 
         const {summonerName, tier, rank, leaguePoints} = data[0]
 
