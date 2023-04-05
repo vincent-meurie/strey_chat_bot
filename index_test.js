@@ -40,11 +40,6 @@ client.on('message', (channel, tags, message, self) => {
             rankFetch(channel, args);
             canSendMessage = false;
         }
-
-        if (command === 'challenge') {
-            client.say(channel, `https://soloqchallenge.fr le nombre de win / loses est dans le titre du stream`);
-            canSendMessage = false;
-        }
     }
 
     setTimeout(function () {
