@@ -80,6 +80,34 @@ const rankSpeak = (channel, data) => {
 
          */
 
+        for (let i=0; i < data.length; i++) {
+            if (data[i].queueType === "RANKED_SOLO_5x5") {
+                const {summonerName, tier, rank, leaguePoints} = data[i]
+
+                if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
+                    client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} avec ${leaguePoints} LP.`)
+                } else {
+                    client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP.`)
+                }
+            }
+        }
+
+        if (data.length === 1 && data[0].queueType === "RANKED_FLEX_SR") {
+            const {summonerName, tier, rank, leaguePoints} = data[0]
+
+            if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
+                client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} avec ${leaguePoints} LP en Flex.`)
+            } else {
+                client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP en Flex.`)
+            }
+        }
+
+        if (typeof data.length === "undefined") {
+            client.say(channel, `Nom d'invocateur invalide ou invocateur non classé.`)
+        }
+
+
+        /*
         const {summonerName, tier, rank, leaguePoints} = data[0]
 
         if (tier === "MASTER" || tier === "GRANDMASTER" || tier === "CHALLENGER") {
@@ -87,6 +115,8 @@ const rankSpeak = (channel, data) => {
         } else {
             client.say(channel, `${summonerName} est actuellement ${capitalize(tier.toLowerCase())} ${rank} avec ${leaguePoints} LP.`)
         }
+
+         */
     } catch (e) {
         client.say(channel, `Invalid or unranked Summoner name.`)
     }
