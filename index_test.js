@@ -73,10 +73,12 @@ const rankSpeak = (channel, data) => {
 
     try {
 
-
+        /*
         if (typeof data[1] !== 'undefined') {
             data[0] = data[1]
         }
+
+         */
 
         const {summonerName, tier, rank, leaguePoints} = data[0]
 
